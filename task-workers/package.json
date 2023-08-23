@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "send": "node ./send.js",
-    "receive": "node ./receive.js"
+    "generateTask": "node ./new_task.js",
+    "addWorker": "node ./worker.js"
   },
   "keywords": [],
   "author": "",
