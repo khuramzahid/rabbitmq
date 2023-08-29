@@ -1,0 +1,28 @@
+{
+  "name": "rabbitmq_1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "init": "chmod +x ./receive_logs_topic.js && chmod +x ./emit_log_topic.js",
+    "emit1": "./emit_log_topic.js \"kern.critical\" \"A critical kernel error\"",
+    "emit2": "./emit_log_topic.js \"kern.warning\" \"A kernel warning\"",
+    "emit3": "./emit_log_topic.js \"kern.info\" \"A kernel info\"",
+    "emit4": "./emit_log_topic.js \"auth.critical\" \"A critical auth error\"",
+    "emit5": "./emit_log_topic.js \"auth.warning\" \"An auth warning\"",
+    "emit6": "./emit_log_topic.js \"auth.info\" \"An auth info\"",
+    "emit7": "./emit_log_topic.js \"cron.critical\" \"A critical cron error\"",
+    "emit8": "./emit_log_topic.js \"cron.warning\" \"A cron warning\"",
+    "emit9": "./emit_log_topic.js \"cron.info\" \"A cron info\"",
+    "receiveAll": "./receive_logs_topic.js \"#\"",
+    "receive1": "./receive_logs_topic.js \"kern.*\"",
+    "receive2": "./receive_logs_topic.js \"*.critical\"",
+    "receive3": "./receive_logs_topic.js \"kern.*\" \"*.critical\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.10.3"
+  }
+}
