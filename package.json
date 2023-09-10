@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "send": "node ./send.js",
-    "receive": "node ./receive.js"
+    "init": "chmod +x ./send.js && chmod +x ./receive.js",
+    "send": "./send.js",
+    "receive": "./receive.js"
   },
   "keywords": [],
   "author": "",
