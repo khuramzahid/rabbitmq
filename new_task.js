@@ -9,15 +9,21 @@ amqp.connect('amqp://localhost', function(error0, connection) {
       throw error1;
     }
     var queue = 'task_queue';
-    var msg = process.argv.slice(2).join(' ') || "Hello World!";
 
     channel.assertQueue(queue, {
       durable: true
     });
-    channel.sendToQueue(queue, Buffer.from(msg), {
-      persistent: true
-    });
-    console.log(" [x] Sent '%s'", msg);
+
+    for (let j=0; j<10; j++) {
+      let msg = process.argv.slice(2).join(' ') || `Hello World! ${j+1}`;
+
+      channel.sendToQueue(queue, Buffer.from(msg), {
+        persistent: true
+      });
+
+      console.log(" [x] Sent '%s'", msg);
+    }
+    
   });
   setTimeout(function() {
     connection.close();
