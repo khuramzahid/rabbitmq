@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "generateTask": "node ./new_task.js",
-    "addWorker": "node ./worker.js"
+    "init": "chmod +x ./rpc_server.js && chmod +x ./rpc_client.js",
+    "server": "./rpc_server.js",
+    "client": "./rpc_client.js 30"
   },
   "keywords": [],
   "author": "",
