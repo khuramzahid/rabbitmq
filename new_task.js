@@ -1,13 +1,31 @@
 var amqp = require('amqplib/callback_api');
 
-amqp.connect('amqp://localhost', function(error0, connection) {
-  if (error0) {
-    throw error0;
-  }
-  connection.createChannel(function(error1, channel) {
-    if (error1) {
-      throw error1;
-    }
+const connect = async (amqp, host) => {
+    return new Promise ((resolve, reject) => {
+        amqp.connect(host, (error, connection) => {
+            if (error) {
+                reject(error);
+            }
+            resolve(connection);
+        });
+    });
+};
+
+const createChannel = async (connection) => {
+    return new Promise ((resolve, reject) => {
+        connection.createChannel((error, channel) => {
+            if (error) {
+                reject(error);
+            }
+            resolve(channel);
+        });
+    });
+};
+
+async function task() {
+    const connection = await connect(amqp, 'amqp://localhost');
+    const channel = await createChannel(connection);
+    
     var queue = 'task_queue';
 
     channel.assertQueue(queue, {
@@ -24,9 +42,10 @@ amqp.connect('amqp://localhost', function(error0, connection) {
       console.log(" [x] Sent '%s'", msg);
     }
     
-  });
-  setTimeout(function() {
-    connection.close();
-    process.exit(0)
-  }, 500);
-});
+    setTimeout(() => {
+        connection.close();
+        process.exit(0);
+    }, 500);
+}
+
+task();
