@@ -9,14 +9,32 @@ if (args.length == 0) {
     process.exit(1);
 }
 
-amqp.connect('amqp://localhost', function(error0, connection) {
-    if (error0) {
-        throw error0;
-    }
-    connection.createChannel(function(error1, channel) {
-        if (error1) {
-            throw error1;
-        }
+const connect = async (amqp, host) => {
+    return new Promise ((resolve, reject) => {
+        amqp.connect(host, (error, connection) => {
+            if (error) {
+                reject(error);
+            }
+            resolve(connection);
+        });
+    });
+};
+
+const createChannel = async (connection) => {
+    return new Promise ((resolve, reject) => {
+        connection.createChannel((error, channel) => {
+            if (error) {
+                reject(error);
+            }
+            resolve(channel);
+        });
+    });
+};
+
+async function task() {
+    const connection = await connect(amqp, 'amqp://localhost');
+    const channel = await createChannel(connection);
+    
         var exchange = 'topic_logs';
 
         channel.assertExchange(exchange, 'topic', {
@@ -41,5 +59,6 @@ amqp.connect('amqp://localhost', function(error0, connection) {
                 noAck: true
             });
         });
-    });
-});
+}
+
+task();
