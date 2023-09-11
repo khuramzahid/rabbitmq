@@ -9,7 +9,9 @@
     "emitInfo": "./emit_log_direct.js info \"[info] For your information.\"",
     "emitWarning": "./emit_log_direct.js warning \"[Warning] Nothing too serious.\"",
     "store": "./receive_logs_direct.js warning error > logs_from_rabbit.log",
-    "receive": "./receive_logs_direct.js info warning error"
+    "receiveError": "./receive_logs_direct.js error",
+    "receiveInfo": "./receive_logs_direct.js info",
+    "receiveWarning": "./receive_logs_direct.js warning"
   },
   "keywords": [],
   "author": "",
